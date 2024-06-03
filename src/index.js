@@ -1,3 +1,3 @@
-import RustBucket from "./rustbucketjs";
+const RustBucket = require('./rustbucketjs');
 
-export { RustBucket };
+export default RustBucket;

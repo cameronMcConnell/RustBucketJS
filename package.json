@@ -5,7 +5,7 @@
   "main": "/src/index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint ."
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/cameronMcConnell/RustBucketJS/issues"
   },
-  "homepage": "https://github.com/cameronMcConnell/RustBucketJS#readme"
+  "homepage": "https://github.com/cameronMcConnell/RustBucketJS#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "globals": "^15.3.0",
+    "mocha": "^10.4.0"
+  }
 }
