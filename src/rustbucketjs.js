@@ -1,16 +1,21 @@
 class RustBucket {
     
-    // Input => url: String
+    // Input => url: string
     constructor(url) {
+        if (typeof(url) != "string") {
+            throw new Error("Input url is not of type 'string'.\n");
+        }
+
         this.url = url
     }
 
     // Input => file: File
-    // Return => String
+    // Return => string
     async uploadFile(file) {
         const formData = new FormData();
         
-        formData.append("file", file);
+        try { formData.append("file", file); }
+        catch (err) { throw err; }
 
         const response = await fetch(url + "/bucket/upload_file", {
             method: "POST",
@@ -24,9 +29,13 @@ class RustBucket {
         return response.statusText;
     }
 
-    // Input => fileName: String
+    // Input => fileName: string
     // Return => Blob
     async downloadFile(fileName) {
+        if (typeof(fileName) != "string") {
+            throw new Error("fileName is not of type 'string'.\n");
+        }
+
         const response = await fetch(url + "/bucket/download_file/" + fileName);
 
         if (!response.ok) {
@@ -39,7 +48,7 @@ class RustBucket {
     }
 
     // Input => void
-    // Return => List[String]
+    // Return => object[string]
     async getFileNames() {
         const response = await fetch(url + "/bucket/get_file_names");
 
@@ -52,16 +61,17 @@ class RustBucket {
         return JSON.parse(fileNameStr);
     }
 
-    // Input => fileNames: List[String]
-    // Return => String
+    // Input => fileNames: object[string]
+    // Return => string
     async deleteFiles(fileNames) {
-        let urlList = "";
-
-        for (let i = 0; i < fileNames.length - 1; i++) {
-            urlList += fileNames[i] + ","
+        if (typeof(fileNames) != "object") {
+            throw new Error("fileNames is not of type 'object'.\n");
         }
 
-        urlList += fileNames[fileNames.length - 1];
+        let urlList;
+
+        try { urlList = this.#formatFileNames(fileNames); } 
+        catch (err) { throw err; }
 
         const response = await fetch(url + "/bucket/deleteFiles?file_names=" + urlList, {
             method: "DELETE"
@@ -72,6 +82,24 @@ class RustBucket {
         }
 
         return response.statusText;
+    }
+
+    #formatFileNames(fileNames) {
+        let urlList = "";
+
+        for (let i = 0; i < fileNames.length - 1; i++) {
+            if (typeof(fileNames[i]) != "string") {
+                throw new Error("Element of fileNames is not of type 'string'.\n");
+            }
+
+            urlList += fileNames[i] + ",";
+        }
+        
+        if (fileNames.length > 1) {
+            urlList += fileNames[fileNames.length - 1];
+        }
+
+        return urlList;
     }
 }
 
