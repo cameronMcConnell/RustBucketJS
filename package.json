@@ -1,0 +1,20 @@
+{
+  "name": "rustbucketjs",
+  "version": "1.0.0",
+  "description": "RustBucketJS is a JavaScript library designed to interface with the Rust-Bucket REST API, providing seamless integration for client-side applications.",
+  "main": "/src/index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cameronMcConnell/RustBucketJS.git"
+  },
+  "author": "cameronMcConnell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cameronMcConnell/RustBucketJS/issues"
+  },
+  "homepage": "https://github.com/cameronMcConnell/RustBucketJS#readme"
+}
