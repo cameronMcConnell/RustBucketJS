@@ -1,6 +1,6 @@
 {
   "name": "rustbucketjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RustBucketJS is a JavaScript library designed to interface with the Rust-Bucket REST API, providing seamless integration for client-side applications.",
   "main": "/src/index.js",
   "scripts": {
